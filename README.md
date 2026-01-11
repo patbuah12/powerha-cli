@@ -4,6 +4,35 @@ A command-line interface for PowerHA Copilot - AI-powered IBM PowerHA cluster ma
 
 ## Installation
 
+### Install from GitHub (Recommended)
+
+```bash
+# Install directly from GitHub
+pip install git+https://github.com/patbuah12/powerha-cli.git
+
+# Or install a specific version/tag
+pip install git+https://github.com/patbuah12/powerha-cli.git@v1.0.0
+
+# Or install from a specific branch
+pip install git+https://github.com/patbuah12/powerha-cli.git@main
+```
+
+### Install from Source
+
+```bash
+# Clone the repository
+git clone https://github.com/patbuah12/powerha-cli.git
+cd powerha-cli
+
+# Install in development mode
+pip install -e .
+
+# Or install normally
+pip install .
+```
+
+### Install from PyPI (Coming Soon)
+
 ```bash
 pip install powerha-cli
 ```

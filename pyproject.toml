@@ -68,6 +68,9 @@ Homepage = "https://github.com/patbuah12/powerha-cli"
 Documentation = "https://github.com/patbuah12/powerha-cli#readme"
 Repository = "https://github.com/patbuah12/powerha-cli"
 
+[tool.hatch.build]
+sources = ["src"]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/powerha_cli"]
 
