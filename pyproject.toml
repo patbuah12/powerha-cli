@@ -1,0 +1,84 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "powerha-cli"
+version = "1.0.0"
+description = "CLI client for PowerHA Copilot - AI-powered IBM PowerHA cluster management"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "ZIEMACS AI", email = "team@ziemacs.ai"}
+]
+keywords = [
+    "powerha",
+    "ibm",
+    "aix",
+    "cluster",
+    "high-availability",
+    "cli",
+    "terminal"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: System :: Systems Administration",
+]
+dependencies = [
+    # CLI & Terminal UI
+    "click>=8.1.0",
+    "rich>=13.7.0",
+    "prompt-toolkit>=3.0.0",
+
+    # HTTP client
+    "httpx>=0.26.0",
+
+    # Configuration
+    "pyyaml>=6.0.1",
+
+    # Keyring for secure credential storage
+    "keyring>=24.0.0",
+
+    # WebSocket for streaming
+    "websockets>=12.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ruff>=0.1.0",
+]
+
+[project.scripts]
+powerha = "powerha_cli.main:main"
+pha = "powerha_cli.main:main"
+
+[project.urls]
+Homepage = "https://github.com/patbuah12/powerha-cli"
+Documentation = "https://github.com/patbuah12/powerha-cli#readme"
+Repository = "https://github.com/patbuah12/powerha-cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/powerha_cli"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/README.md",
+    "/LICENSE",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+select = ["E", "W", "F", "I", "B", "C4", "UP"]
