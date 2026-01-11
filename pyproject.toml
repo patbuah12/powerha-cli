@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "powerha-cli"
+name = "powerha-copilot-cli"
 version = "1.0.0"
-description = "CLI client for PowerHA Copilot - AI-powered IBM PowerHA cluster management"
+description = "CLI client for PowerHA Copilot - AI-powered high availability cluster management"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.10"
@@ -60,8 +60,9 @@ dev = [
 ]
 
 [project.scripts]
-powerha = "powerha_cli.main:main"
-pha = "powerha_cli.main:main"
+powerha-copilot = "powerha_copilot_cli.main:main"
+pha-copilot = "powerha_copilot_cli.main:main"
+phac = "powerha_copilot_cli.main:main"
 
 [project.urls]
 Homepage = "https://github.com/patbuah12/powerha-cli"
@@ -72,7 +73,7 @@ Repository = "https://github.com/patbuah12/powerha-cli"
 sources = ["src"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/powerha_cli"]
+packages = ["src/powerha_copilot_cli"]
 
 [tool.hatch.build.targets.sdist]
 include = [

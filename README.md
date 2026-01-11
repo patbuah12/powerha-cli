@@ -1,6 +1,6 @@
-# PowerHA CLI
+# PowerHA Copilot CLI
 
-A command-line interface for PowerHA Copilot - AI-powered IBM PowerHA cluster management.
+A command-line interface for PowerHA Copilot - AI-powered high availability cluster management.
 
 ## Installation
 
@@ -34,21 +34,29 @@ pip install .
 ### Install from PyPI (Coming Soon)
 
 ```bash
-pip install powerha-cli
+pip install powerha-copilot-cli
 ```
 
 ## Quick Start
 
 ```bash
 # Configure your server
-powerha config --url https://powerha.yourcompany.com/api
+powerha-copilot config --url https://copilot.yourcompany.com/api
 
 # Login with your API key
-powerha login
+powerha-copilot login
 
 # Start chatting
-powerha chat
+powerha-copilot chat
 ```
+
+## Command Aliases
+
+The CLI provides multiple command aliases for convenience:
+
+| Command | Alias | Short Alias |
+|---------|-------|-------------|
+| `powerha-copilot` | `pha-copilot` | `phac` |
 
 ## Usage
 
@@ -56,16 +64,16 @@ powerha chat
 
 ```bash
 # Start interactive chat mode
-powerha chat
+powerha-copilot chat
 
-# Or just run powerha
-powerha
+# Or use the short alias
+phac chat
 ```
 
 ```
 ╭─────────────────────────────────────────╮
 │        PowerHA Copilot                  │
-│  AI-powered IBM PowerHA management      │
+│  AI-powered cluster management          │
 ╰─────────────────────────────────────────╯
 
 You: Check health of all clusters
@@ -91,42 +99,42 @@ You: _
 
 ```bash
 # List all clusters
-powerha cluster list
+powerha-copilot cluster list
 
 # Get cluster status
-powerha cluster status prod-cluster-01
+powerha-copilot cluster status prod-cluster-01
 
 # Check cluster health
-powerha cluster health prod-cluster-01
+powerha-copilot cluster health prod-cluster-01
 ```
 
 ### Authentication
 
 ```bash
 # Login with API key
-powerha login
+powerha-copilot login
 
 # Login with specific server
-powerha login --url https://powerha.example.com/api
+powerha-copilot login --url https://copilot.example.com/api
 
 # Check current user
-powerha whoami
+powerha-copilot whoami
 
 # Logout
-powerha logout
+powerha-copilot logout
 ```
 
 ### Configuration
 
 ```bash
 # Show current configuration
-powerha config --show
+powerha-copilot config --show
 
 # Set API server URL
-powerha config --url https://powerha.yourcompany.com/api
+powerha-copilot config --url https://copilot.yourcompany.com/api
 
 # Set theme
-powerha config --theme dark
+powerha-copilot config --theme dark
 ```
 
 ## Chat Commands
@@ -154,10 +162,10 @@ Show recent operations history
 
 ## Configuration File
 
-Configuration is stored in `~/.powerha/config.yaml`:
+Configuration is stored in `~/.powerha-copilot/config.yaml`:
 
 ```yaml
-api_url: https://powerha.yourcompany.com/api
+api_url: https://copilot.yourcompany.com/api
 api_version: v1
 theme: dark
 output_format: rich
@@ -169,8 +177,8 @@ timeout: 30
 
 | Variable | Description |
 |----------|-------------|
-| `POWERHA_API_URL` | Override API server URL |
-| `POWERHA_API_KEY` | API key (alternative to login) |
+| `POWERHA_COPILOT_API_URL` | Override API server URL |
+| `POWERHA_COPILOT_API_KEY` | API key (alternative to login) |
 
 ## Requirements
 

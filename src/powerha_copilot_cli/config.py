@@ -1,5 +1,5 @@
 """
-Configuration management for PowerHA CLI.
+Configuration management for PowerHA Copilot CLI.
 
 Handles:
 - API endpoint configuration
@@ -17,15 +17,15 @@ import keyring
 import yaml
 
 
-APP_NAME = "powerha-cli"
-CONFIG_DIR = Path.home() / ".powerha"
+APP_NAME = "powerha-copilot-cli"
+CONFIG_DIR = Path.home() / ".powerha-copilot"
 CONFIG_FILE = CONFIG_DIR / "config.yaml"
 KEYRING_SERVICE = "powerha-copilot"
 
 
 @dataclass
 class Config:
-    """PowerHA CLI configuration."""
+    """PowerHA Copilot CLI configuration."""
 
     # API Settings
     api_url: str = "https://api.powerha.ziemacs.ai"

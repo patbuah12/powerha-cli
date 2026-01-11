@@ -12,7 +12,7 @@ from dataclasses import dataclass
 
 import httpx
 
-from powerha_cli.config import Config, get_config
+from powerha_copilot_cli.config import Config, get_config
 
 
 @dataclass
@@ -23,12 +23,12 @@ class APIError(Exception):
     details: Optional[Dict[str, Any]] = None
 
 
-class PowerHAClient:
+class PowerHACopilotClient:
     """
     Async HTTP client for PowerHA Copilot API.
 
     Usage:
-        async with PowerHAClient() as client:
+        async with PowerHACopilotClient() as client:
             response = await client.chat("Check cluster health")
             clusters = await client.list_clusters()
     """
@@ -38,7 +38,7 @@ class PowerHAClient:
         self.config = config or get_config()
         self._client: Optional[httpx.AsyncClient] = None
 
-    async def __aenter__(self) -> "PowerHAClient":
+    async def __aenter__(self) -> "PowerHACopilotClient":
         """Async context manager entry."""
         self._client = httpx.AsyncClient(
             base_url=self.config.base_url,
@@ -56,7 +56,7 @@ class PowerHAClient:
         """Get request headers with authentication."""
         headers = {
             "Content-Type": "application/json",
-            "User-Agent": f"powerha-cli/{self.config.api_version}",
+            "User-Agent": f"powerha-copilot-cli/{self.config.api_version}",
         }
 
         api_key = self.config.get_api_key()
@@ -79,7 +79,7 @@ class PowerHAClient:
             response = await self._client.request(method, endpoint, **kwargs)
 
             if response.status_code == 401:
-                raise APIError(401, "Authentication required. Run 'powerha login' first.")
+                raise APIError(401, "Authentication required. Run 'powerha-copilot login' first.")
 
             if response.status_code == 403:
                 raise APIError(403, "Access denied. Check your permissions.")
@@ -340,9 +340,9 @@ class PowerHAClient:
 
 
 # Synchronous wrapper for simple CLI usage
-def sync_client() -> PowerHAClient:
+def sync_client() -> PowerHACopilotClient:
     """Create a synchronous client wrapper."""
-    return PowerHAClient()
+    return PowerHACopilotClient()
 
 
 def run_async(coro):

@@ -1,5 +1,5 @@
 """
-PowerHA CLI - Main entry point.
+PowerHA Copilot CLI - Main entry point.
 
 A rich terminal interface for PowerHA Copilot.
 """
@@ -18,9 +18,9 @@ from rich.live import Live
 from rich.spinner import Spinner
 from rich.text import Text
 
-from powerha_cli import __version__
-from powerha_cli.config import Config, get_config
-from powerha_cli.client import PowerHAClient, APIError
+from powerha_copilot_cli import __version__
+from powerha_copilot_cli.config import Config, get_config
+from powerha_copilot_cli.client import PowerHACopilotClient, APIError
 
 
 console = Console()
@@ -35,21 +35,21 @@ console = Console()
 @click.pass_context
 def main(ctx, version):
     """
-    PowerHA CLI - AI-powered IBM PowerHA cluster management.
+    PowerHA Copilot CLI - AI-powered high availability cluster management.
 
     \b
     Quick start:
-      powerha login           # Authenticate
-      powerha chat            # Start interactive chat
-      powerha cluster list    # List clusters
+      powerha-copilot login           # Authenticate
+      powerha-copilot chat            # Start interactive chat
+      powerha-copilot cluster list    # List clusters
 
     \b
     For more help:
-      powerha --help
-      powerha <command> --help
+      powerha-copilot --help
+      powerha-copilot <command> --help
     """
     if version:
-        console.print(f"[bold blue]PowerHA CLI[/] v{__version__}")
+        console.print(f"[bold blue]PowerHA Copilot CLI[/] v{__version__}")
         return
 
     if ctx.invoked_subcommand is None:
@@ -89,7 +89,7 @@ def login(api_key: Optional[str], url: Optional[str]):
         return
 
     async def do_login():
-        async with PowerHAClient(config) as client:
+        async with PowerHACopilotClient(config) as client:
             return await client.login_with_api_key(api_key)
 
     with console.status("[bold green]Authenticating..."):
@@ -128,7 +128,7 @@ def whoami():
         return
 
     async def get_user():
-        async with PowerHAClient(config) as client:
+        async with PowerHACopilotClient(config) as client:
             return await client.whoami()
 
     try:
@@ -195,7 +195,7 @@ def chat(no_stream: bool):
             # Send to API
             async def send_message():
                 nonlocal conversation_id
-                async with PowerHAClient(config) as client:
+                async with PowerHACopilotClient(config) as client:
                     if use_streaming:
                         console.print("[bold blue]Copilot[/]: ", end="")
                         full_response = ""
@@ -268,7 +268,7 @@ async def show_clusters():
     """Show cluster list in chat."""
     config = get_config()
     try:
-        async with PowerHAClient(config) as client:
+        async with PowerHACopilotClient(config) as client:
             clusters = await client.list_clusters()
             if clusters:
                 table = Table(title="Clusters")
@@ -310,7 +310,7 @@ def cluster_list(fmt: str):
     config = get_config()
 
     async def get_clusters():
-        async with PowerHAClient(config) as client:
+        async with PowerHACopilotClient(config) as client:
             return await client.list_clusters()
 
     with console.status("[bold green]Loading clusters..."):
@@ -358,7 +358,7 @@ def cluster_status(cluster_id: str):
     config = get_config()
 
     async def get_status():
-        async with PowerHAClient(config) as client:
+        async with PowerHACopilotClient(config) as client:
             return await client.get_cluster_status(cluster_id)
 
     with console.status(f"[bold green]Getting status for {cluster_id}..."):
@@ -415,7 +415,7 @@ def cluster_health(cluster_id: str):
     config = get_config()
 
     async def get_health():
-        async with PowerHAClient(config) as client:
+        async with PowerHACopilotClient(config) as client:
             return await client.get_cluster_health(cluster_id)
 
     with console.status(f"[bold green]Checking health of {cluster_id}..."):
